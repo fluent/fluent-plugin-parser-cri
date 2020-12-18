@@ -49,7 +49,7 @@ module Fluent
             time = t
             record = r
           }
-          if @merge_cri_fields
+          if @merge_cri_fields && record
             record['stream'] = elems[1]
             record['logtag'] = elems[2]
           end
