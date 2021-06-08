@@ -27,6 +27,17 @@ class CriParserTest < Test::Unit::TestCase
     end
   end
 
+  def test_parse_with_heading_spaces
+    d = create_driver('')
+    log = '2020-10-10T00:10:00.333333333Z stdout F    Hello Fluentd with heading spaces'
+    d.instance.parse(log) do |time, record|
+      t = event_time('2020-10-10T00:10:00.333333333Z', format: '%Y-%m-%dT%H:%M:%S.%L%z')
+      r = {'stream' => 'stdout', 'logtag' => 'F', 'message' => '   Hello Fluentd with heading spaces', 'time' => '2020-10-10T00:10:00.333333333Z'}
+      assert_equal t, time
+      assert_equal r, record
+    end
+  end
+
   def test_parse_without_keep_time_key
     conf = %[keep_time_key false]
     d = create_driver(conf)
