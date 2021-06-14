@@ -40,7 +40,7 @@ module Fluent
       end
 
       def parse(text)
-        elems = text.split(" ".freeze, 4)
+        elems = text.split(/\s/.freeze, 4)
         return yield nil if elems.size != 4
 
         if @sub_parser
