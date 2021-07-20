@@ -106,6 +106,19 @@ If you don't need `stream`/`logtag` fields, set `merge_cri_fields false` like be
 </parse>
 ```
 
+### Concatenate multiple `message` records into one
+
+If you want to concatenate the following `message` records into one record, 
+use @type [concat](https://github.com/fluent-plugins-nursery/fluent-plugin-concat) filter plugin with `use_partial_cri_logtag` parameter.
+
+ ```
+2020-10-10 09:10:00.333333333 +0900 cri: {"stream":"stdout","logtag":"P","message":"This is first line","time":"2020-10-10T00:10:00.333333333Z"}
+2020-10-10 09:11:00.333333333 +0900 cri: {"stream":"stdout","logtag":"F","message":"This is last line","time":"2020-10-10T00:11:00.333333333Z"}
+```
+
+See fluent-plugin-concat's [usage](https://github.com/fluent-plugins-nursery/fluent-plugin-concat#usage) in more details.
+
+
 ## Copyright
 
 * Copyright(c) 2020- Fluentd project
